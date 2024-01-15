@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.tsx
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+// import TwitterAuthScreen from './TwitterAuthScreen';
+import FeedScreen from './screens/FeedScreen';
+import DetailScreen from './screens/DetailScreen';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+const Stack = createSharedElementStackNavigator();
+
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="ImageFeed">
+        {/* <Stack.Screen name="TwitterAuth" component={TwitterAuthScreen} /> */}
+        <Stack.Screen name="ImageFeed" component={FeedScreen} />
+        <Stack.Screen name="ImageDetail" component={DetailScreen}
+          sharedElements={(route, otherRoute, showing)=>{
+            const {item} = route.params;
+            return [`image-${item.id}`];
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
