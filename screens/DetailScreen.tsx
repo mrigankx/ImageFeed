@@ -15,15 +15,15 @@ const DetailScreen = ({ route }) => {
   );
 };
 
-// DetailScreen.sharedElements = (route) => {
-//   const { item } = route.params;
-//   return [
-//     {
-//       id: `image-${item.id}`,
-//       animation: 'move',
-//       resize: 'clip'
-//     }
-//   ];
-// };
+DetailScreen.sharedElements = (route) => {
+  const { item } = route.params;
+  return [
+    {
+      id: `image-${item.id}`,
+      animation: 'move',
+      resize: 'clip'
+    }
+  ];
+};
 
 export default DetailScreen;
